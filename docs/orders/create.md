@@ -38,7 +38,7 @@ APP_TOKEN: YOUR_APP_TOKEN
   "ticketId": "001",
   "createdAt": "2025-07-12T21:51:39.204Z",
   "type": "delivery",
-  "mesa": "1",
+  "in_store_id": "1",
   "timeToDelivery": "2025-07-12T21:51:39.204Z",
   "observations": "Rapido estou com fome!",
   "status": "PENDING",
@@ -103,7 +103,7 @@ APP_TOKEN: YOUR_APP_TOKEN
 | `ticketId`       | string  | Número apresentado ao cliente                         | `"001"`                                                                    |
 | `createdAt`      | string  | Data/hora de criação (ISO 8601)                       | `"2025-07-12T21:51:39.204Z"`                                               |
 | `type`           | string  | Tipo do pedido                                        | `"delivery"`, `"in_store"`, `"takeout"`                                    |
-| `mesa`           | string  | Número da mesa (apenas in_store)                      | `"1"`                                                                      |
+| `in_store_id`    | string  | Número da mesa ou comanda (apenas pedidos in_store)   | `"1"`                                                                      |
 | `timeToDelivery` | string  | Tempo estimado para entrega                           | `"2025-07-12T21:51:39.204Z"`                                               |
 | `observations`   | string  | Observações do pedido                                 | `"Rapido estou com fome!"`                                                 |
 | `status`         | string  | Status atual do pedido                                | `"PENDING"`, `"ACCEPTED"`, `"PREPARING"`, `"DONE"`, `"CANCELLED"`          |
