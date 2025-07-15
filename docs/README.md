@@ -17,7 +17,7 @@ A API do Delivery Zen permite que você integre seu sistema com nossa plataforma
 
 ### Autenticação
 
-Todas as requisições para a API devem incluir o APP_ID e APP_TOKEN nos headers.
+Todas as requisições para a API devem incluir o APP_ID e APP_TOKEN nos headers, que você pode gerar na sessão `Integrações do Delivery Zen`
 
 ```http
 APP_ID: YOUR_APP_ID
