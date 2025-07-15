@@ -5,7 +5,9 @@
 ## Índice
 
 - [Introdução](README.md)
-- [API de Pedidos](orders-api.md)
+- [Pedidos](orders/README.md)
+  - [Criar Pedidos](orders/create.md)
+  - [Alterar Status](orders/update-status.md)
 - [Webhooks](webhooks.md)
 
 ## Introdução
@@ -33,5 +35,5 @@ https://api.deliveryzen.com.br/v1
 
 ## Próximos Passos
 
-- [API de Pedidos](orders-api.md) - Aprenda como enviar pedidos para a plataforma
+- [Pedidos](orders/README.md) - Gerencie pedidos na plataforma
 - [Webhooks](webhooks.md) - Saiba como receber notificações de atualização de pedidos

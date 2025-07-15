@@ -1,6 +1,6 @@
-# API de Pedidos
+# Criar Pedidos
 
-> Envie pedidos para a plataforma Delivery Zen
+> Envie novos pedidos para a plataforma Delivery Zen
 
 ## Visão Geral
 
