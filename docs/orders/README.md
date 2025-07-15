@@ -8,13 +8,13 @@ A seção de Pedidos da API do Delivery Zen permite que você gerencie completam
 
 ## Funcionalidades Disponíveis
 
-### [Criar Pedidos](create.md)
+### [Criar Pedidos](orders/create.md)
 
 Envie novos pedidos para a plataforma Delivery Zen. Esta API permite criar pedidos com todos os detalhes necessários como cliente, endereço, itens, pagamento e observações.
 
 **Endpoint**: `POST https://api.deliveryzen.com.br/v1/orders`
 
-### [Alterar Status](update-status.md)
+### [Alterar Status](orders/update-status.md)
 
 Atualize o status de pedidos existentes na plataforma. Útil para sincronizar o progresso do pedido entre seu sistema e o Delivery Zen.
 
@@ -40,7 +40,7 @@ APP_TOKEN: YOUR_APP_TOKEN
 
 | Status      | Descrição                        |
 | ----------- | -------------------------------- |
-| `PENDING`   | Pedido pendente (status inicial) |
+| `pending`   | Pedido pendente (status inicial) |
 | `preparing` | Pedido está sendo preparado      |
 | `done`      | Pedido pronto                    |
 | `in_route`  | Pedido saiu para entrega         |
@@ -49,6 +49,6 @@ APP_TOKEN: YOUR_APP_TOKEN
 
 ## Próximos Passos
 
-- [Criar Pedidos](create.md) - Aprenda como enviar novos pedidos
-- [Alterar Status](update-status.md) - Atualize o status dos pedidos
+- [Criar Pedidos](orders/create.md) - Aprenda como enviar novos pedidos
+- [Alterar Status](orders/update-status.md) - Atualize o status dos pedidos
 - [Webhooks](../webhooks.md) - Receba notificações automáticas
