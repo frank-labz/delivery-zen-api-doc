@@ -52,13 +52,12 @@ APP_TOKEN: YOUR_APP_TOKEN
 
 ### Status Disponíveis
 
-| Status      | Descrição                   |
-| ----------- | --------------------------- |
-| `preparing` | Pedido está sendo preparado |
-| `done`      | Pedido pronto               |
-| `in_route`  | Pedido saiu para entrega    |
-| `delivered` | Pedido entregue ao cliente  |
-| `canceled`  | Pedido cancelado            |
+| Status     | Descrição                            |
+| ---------- | ------------------------------------ |
+| `created`  | Pedido criado aguardando confirmação |
+| `waiting`  | Pedido e pronto para ser produzido   |
+| `done`     | Pedido pronto para ser despachado    |
+| `canceled` | Pedido cancelado                     |
 
 ## Implementação
 

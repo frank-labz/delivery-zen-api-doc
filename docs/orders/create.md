@@ -37,14 +37,13 @@ APP_TOKEN: YOUR_APP_TOKEN
   "id": "123123123",
   "ticketId": "001",
   "createdAt": "2025-07-12T21:51:39.204Z",
-  "type": "delivery",
-  "in_store_id": "1",
+  "kind": "delivery",
+  "inStoreId": "1",
   "timeToDelivery": "2025-07-12T21:51:39.204Z",
   "observations": "Rapido estou com fome!",
-  "status": "PENDING",
+  "status": "created",
   "subTotal": 21.0,
   "deliveryFee": 5.0,
-  "additionalFees": 3.0,
   "discounts": 2.0,
   "total": 27.0,
   "paymentMethod": "MONEY",
@@ -60,13 +59,13 @@ APP_TOKEN: YOUR_APP_TOKEN
     "number": "S/N",
     "line1": "Qd 53 Lt 20",
     "line2": "Qualquer coisa",
-    "coordinates": [-16.1234, -49.5678],
+    "coordinates": "-16.1234, -49.5678",
     "neighborhood": "Setor Sul I",
     "city": "Uruaçu",
     "state": "GO",
-    "post_code": "76400000"
+    "postalCode": "76400000"
   },
-  "items": [
+  "itens": [
     {
       "id": 0,
       "name": "Dom Frank",
@@ -102,16 +101,15 @@ APP_TOKEN: YOUR_APP_TOKEN
 | `id`             | string  | Código único do pedido                                | `"123123123"`                                                              |
 | `ticketId`       | string  | Número apresentado ao cliente                         | `"001"`                                                                    |
 | `createdAt`      | string  | Data/hora de criação (ISO 8601)                       | `"2025-07-12T21:51:39.204Z"`                                               |
-| `type`           | string  | Tipo do pedido                                        | `"delivery"`, `"in_store"`, `"takeout"`                                    |
-| `in_store_id`    | string  | Número da mesa ou comanda (apenas pedidos in_store)   | `"1"`                                                                      |
+| `kind`           | string  | Tipo do pedido                                        | `"delivery"`, `"in_store"`, `"takeout"`                                    |
+| `inStoreId`      | string  | Número da mesa ou comanda (apenas pedidos in_store)   | `"1"`                                                                      |
 | `timeToDelivery` | string  | Tempo estimado para entrega                           | `"2025-07-12T21:51:39.204Z"`                                               |
 | `observations`   | string  | Observações do pedido                                 | `"Rapido estou com fome!"`                                                 |
-| `status`         | string  | Status atual do pedido                                | `"PENDING"`, `"ACCEPTED"`, `"PREPARING"`, `"DONE"`, `"CANCELLED"`          |
+| `status`         | string  | Status atual do pedido                                | `created`, `waiting (confirmed)`                                           |
 | `subTotal`       | number  | Total dos produtos (sem descontos, adicionais e taxa) | `21.00`                                                                    |
 | `deliveryFee`    | number  | Taxa de entrega                                       | `5.00`                                                                     |
-| `additionalFees` | number  | Taxas adicionais                                      | `3.00`                                                                     |
 | `discounts`      | number  | Descontos aplicados                                   | `2.00`                                                                     |
-| `total`          | number  | Total final                                           | `27.00`                                                                    |
+| `total`          | number  | Total final                                           | `24.00`                                                                    |
 | `paymentMethod`  | string  | Método de pagamento                                   | `"MONEY"`, `"CREDIT_CARD"`, `"DEBIT_CARD"`, `"PIX"`, `"TICKET"`, `"OTHER"` |
 | `changeAmount`   | number  | Troco para o cliente                                  | `0.00`                                                                     |
 | `paid`           | boolean | Se o pagamento foi feito antecipadamente              | `false`                                                                    |
@@ -124,11 +122,8 @@ APP_TOKEN: YOUR_APP_TOKEN
 
 ### Status do Pedido
 
-- **`PENDING`**: Pedido pendente
-- **`ACCEPTED`**: Pedido aceito
-- **`PREPARING`**: Em preparação
-- **`DONE`**: Pronto
-- **`CANCELLED`**: Cancelado
+- **`created`**: Pedido criado mas pendente aguardando confirmação
+- **`waiting`**: Pedido aceito e pronto para ser preparado.
 
 ### Métodos de Pagamento
 
@@ -149,7 +144,7 @@ APP_TOKEN: YOUR_APP_TOKEN
 }
 ```
 
-### Estrutura do Endereço de Entrega
+### Estrutura do Endereço de Entrega (Obrigatório apenas para pedidos delivery)
 
 ```json
 {
@@ -157,11 +152,11 @@ APP_TOKEN: YOUR_APP_TOKEN
   "number": "S/N",
   "line1": "Qd 53 Lt 20",
   "line2": "Qualquer coisa",
-  "coordinates": [-16.1234, -49.5678],
+  "coordinates": "-16.1234, -49.5678",
   "neighborhood": "Setor Sul I",
   "city": "Uruaçu",
   "state": "GO",
-  "post_code": "76400000"
+  "postalCode": "76400000"
 }
 ```
 
@@ -231,7 +226,7 @@ const orderData = {
   id: "123123123",
   ticketId: "001",
   createdAt: new Date().toISOString(),
-  type: "delivery",
+  kind: "delivery",
   status: "PENDING",
   // ... outros campos
 };
@@ -272,7 +267,7 @@ order_data = {
     "id": "123123123",
     "ticketId": "001",
     "createdAt": datetime.now().isoformat(),
-    "type": "delivery",
+    "kind": "delivery",
     "status": "PENDING",
     # ... outros campos
 }
@@ -291,7 +286,7 @@ curl -X POST https://api.deliveryzen.com.br/v1/orders \
     "id": "123123123",
     "ticketId": "001",
     "createdAt": "2025-07-12T21:51:39.204Z",
-    "type": "delivery",
+    "kind": "delivery",
     "status": "PENDING",
     "subTotal": 21.00,
     "total": 21.00,
@@ -300,7 +295,7 @@ curl -X POST https://api.deliveryzen.com.br/v1/orders \
       "name": "Bruno Frank",
       "phone": "62991724016"
     },
-    "items": [
+    "itens": [
       {
         "id": 0,
         "name": "Dom Frank",
@@ -353,15 +348,15 @@ curl -X POST https://api.deliveryzen.com.br/v1/orders \
 ### Campos Obrigatórios
 
 - `id` - Código único do pedido
-- `type` - Tipo do pedido
+- `kind` - Tipo do pedido
 - `status` - Status do pedido
 - `customer` - Dados do cliente
-- `items` - Lista de itens do pedido
+- `itens` - Lista de itens do pedido
 
 ### Validações Específicas
 
 - `id` deve ser único
-- `total` deve ser igual à soma de `subTotal + deliveryFee + additionalFees - discounts`
+- `total` deve ser igual à soma de `subTotal + deliveryFee - discounts`
 - `coordinates` deve ser um array com latitude e longitude válidas
 - `phone` deve estar no formato brasileiro (DDD + número)
 
