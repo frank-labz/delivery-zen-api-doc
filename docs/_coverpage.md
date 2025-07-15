@@ -4,8 +4,7 @@
 
 > Documentação completa da API do Delivery Zen
 
-[Começar](README.md)
-[GitHub](https://github.com/deliveryzen)
+[Delivery Zen API](README.md)
 
 <!-- background image -->
 

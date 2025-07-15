@@ -6,6 +6,7 @@
 
 - [Introdução](README.md)
 - [API de Pedidos](orders-api.md)
+- [Webhooks](webhooks.md)
 
 ## Introdução
 
@@ -17,7 +18,7 @@ A API do Delivery Zen permite que você integre seu sistema com nossa plataforma
 
 ### Autenticação
 
-Todas as requisições para a API devem incluir o APP_ID e APP_TOKEN nos headers, que você pode gerar na sessão `Integrações do Delivery Zen`
+Todas as requisições para a API devem incluir o APP_ID e APP_TOKEN nos headers.
 
 ```http
 APP_ID: YOUR_APP_ID
@@ -33,3 +34,4 @@ https://api.deliveryzen.com.br/v1
 ## Próximos Passos
 
 - [API de Pedidos](orders-api.md) - Aprenda como enviar pedidos para a plataforma
+- [Webhooks](webhooks.md) - Saiba como receber notificações de atualização de pedidos
