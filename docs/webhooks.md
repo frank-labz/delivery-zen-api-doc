@@ -12,18 +12,23 @@ Quando um pedido for atualizado, enviaremos uma requisição HTTP POST para a UR
 
 ```json
 {
-  "event": "order_updated",
+  "resource": "order",
+  "event": "updated",
   "payload": {
     "id": "123",
     "external_id": "963",
+    "previous_status": "waiting",
     "status": "preparing"
   }
 }
 ```
 
-- `id`: Código do pedido no Delivery Zen
-- `external_id`: Código do pedido no sistema do integrador (se informado no momento da criação)
-- `status`: Novo status do pedido
+- `resource`: Tipo do recurso (sempre "order")
+- `event`: Tipo do evento (sempre "updated")
+- `payload.id`: Código do pedido no Delivery Zen
+- `payload.external_id`: Código do pedido no sistema do integrador (se informado no momento da criação)
+- `payload.previous_status`: Status anterior do pedido
+- `payload.status`: Novo status do pedido
 
 ### Status possíveis
 
@@ -48,8 +53,8 @@ const app = express();
 app.use(express.json());
 
 app.post("/webhook", (req, res) => {
-  const { event, payload } = req.body;
-  if (event === "order_updated") {
+  const { resource, event, payload } = req.body;
+  if (resource === "order" && event === "updated") {
     console.log("Pedido atualizado:", payload);
     // Atualize o pedido no seu sistema
   }
@@ -68,7 +73,7 @@ app = Flask(__name__)
 @app.route('/webhook', methods=['POST'])
 def webhook():
     data = request.json
-    if data.get('event') == 'order_updated':
+    if data.get('resource') == 'order' and data.get('event') == 'updated':
         payload = data.get('payload')
         print('Pedido atualizado:', payload)
         # Atualize o pedido no seu sistema

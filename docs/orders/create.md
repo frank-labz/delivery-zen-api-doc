@@ -24,8 +24,8 @@ POST
 
 ```http
 Content-Type: application/json
-APP_ID: YOUR_APP_ID
-APP_TOKEN: YOUR_APP_TOKEN
+ZEN-APP-ID: YOUR_ZEN_APP_ID
+ZEN-APP-TOKEN: YOUR_ZEN_APP_TOKEN
 ```
 
 ## Estrutura do Payload
@@ -36,7 +36,6 @@ APP_TOKEN: YOUR_APP_TOKEN
 {
   "id": "123123123",
   "ticketId": "001",
-  "createdAt": "2025-07-12T21:51:39.204Z",
   "kind": "delivery",
   "inStoreId": "1",
   "timeToDelivery": "2025-07-12T21:51:39.204Z",
@@ -100,7 +99,6 @@ APP_TOKEN: YOUR_APP_TOKEN
 | ---------------- | ------- | ----------------------------------------------------- | -------------------------------------------------------------------------- |
 | `id`             | string  | Código único do pedido                                | `"123123123"`                                                              |
 | `ticketId`       | string  | Número apresentado ao cliente                         | `"001"`                                                                    |
-| `createdAt`      | string  | Data/hora de criação (ISO 8601)                       | `"2025-07-12T21:51:39.204Z"`                                               |
 | `kind`           | string  | Tipo do pedido                                        | `"delivery"`, `"in_store"`, `"takeout"`                                    |
 | `inStoreId`      | string  | Número da mesa ou comanda (apenas pedidos in_store)   | `"1"`                                                                      |
 | `timeToDelivery` | string  | Tempo estimado para entrega                           | `"2025-07-12T21:51:39.204Z"`                                               |
@@ -204,8 +202,8 @@ const sendOrder = async (orderData) => {
       {
         headers: {
           "Content-Type": "application/json",
-          APP_ID: "YOUR_APP_ID",
-          APP_TOKEN: "YOUR_APP_TOKEN",
+          "ZEN-APP-ID": "YOUR_ZEN_APP_ID",
+          "ZEN-APP-TOKEN": "YOUR_ZEN_APP_TOKEN",
         },
       }
     );
@@ -225,7 +223,6 @@ const sendOrder = async (orderData) => {
 const orderData = {
   id: "123123123",
   ticketId: "001",
-  createdAt: new Date().toISOString(),
   kind: "delivery",
   status: "PENDING",
   // ... outros campos
@@ -241,15 +238,15 @@ import requests
 import json
 from datetime import datetime
 
-def send_order(order_data, app_id, app_token):
+def send_order(order_data, zen_app_id, zen_app_token):
     url = "https://api.deliveryzen.com.br/v1/orders"
 
     payload = order_data
 
     headers = {
         "Content-Type": "application/json",
-        "APP_ID": app_id,
-        "APP_TOKEN": app_token
+        "ZEN-APP-ID": zen_app_id,
+        "ZEN-APP-TOKEN": zen_app_token
     }
 
     try:
@@ -266,13 +263,12 @@ def send_order(order_data, app_id, app_token):
 order_data = {
     "id": "123123123",
     "ticketId": "001",
-    "createdAt": datetime.now().isoformat(),
     "kind": "delivery",
     "status": "PENDING",
     # ... outros campos
 }
 
-send_order(order_data, "YOUR_APP_ID", "YOUR_APP_TOKEN")
+send_order(order_data, "YOUR_ZEN_APP_ID", "YOUR_ZEN_APP_TOKEN")
 ```
 
 ### Exemplo em cURL
@@ -280,12 +276,11 @@ send_order(order_data, "YOUR_APP_ID", "YOUR_APP_TOKEN")
 ```bash
 curl -X POST https://api.deliveryzen.com.br/v1/orders \
   -H "Content-Type: application/json" \
-  -H "APP_ID: YOUR_APP_ID" \
-  -H "APP_TOKEN: YOUR_APP_TOKEN" \
+  -H "ZEN-APP-ID: YOUR_ZEN_APP_ID" \
+  -H "ZEN-APP-TOKEN: YOUR_ZEN_APP_TOKEN" \
   -d '{
     "id": "123123123",
     "ticketId": "001",
-    "createdAt": "2025-07-12T21:51:39.204Z",
     "kind": "delivery",
     "status": "PENDING",
     "subTotal": 21.00,
@@ -339,7 +334,7 @@ curl -X POST https://api.deliveryzen.com.br/v1/orders \
 | ------ | ----------------------------------------------- |
 | `200`  | Pedido criado com sucesso                       |
 | `400`  | Dados inválidos ou campos obrigatórios ausentes |
-| `401`  | APP_ID ou APP_TOKEN inválido                    |
+| `401`  | ZEN-APP-ID ou ZEN-APP-TOKEN inválido            |
 | `403`  | Acesso negado                                   |
 | `500`  | Erro interno do servidor                        |
 
@@ -362,7 +357,7 @@ curl -X POST https://api.deliveryzen.com.br/v1/orders \
 
 ## Rate Limiting
 
-A API possui limite de 100 requisições por minuto por APP_ID.
+A API possui limite de 100 requisições por minuto por ZEN-APP-ID.
 
 ## Tratamento de Erros
 
@@ -383,7 +378,7 @@ Em caso de erro temporário (5xx), implemente retry com backoff exponencial:
 
 ### Autenticação
 
-Sempre use HTTPS e inclua o APP_ID e APP_TOKEN nos headers.
+Sempre use HTTPS e inclua o ZEN-APP-ID e ZEN-APP-TOKEN nos headers.
 
 ### Validação
 
